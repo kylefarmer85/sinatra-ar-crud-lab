@@ -22,14 +22,14 @@ class ApplicationController < Sinatra::Base
   end
 
   patch '/articles/:id' do 
-    @article = Article.find(params[:id])
+    article = Article.find(params[:id])
     new_updates = {
       title: params[:title],
       content: params[:content]
     }
-    @article.update(new_updates)
+    article.update(new_updates)
 
-    redirect "/articles/#{@article.id}" 
+    redirect "/articles/#{article.id}" 
   end
 
   get '/articles/:id' do 
@@ -48,8 +48,9 @@ class ApplicationController < Sinatra::Base
   end
 
   delete '/articles/:id' do 
-    @article = Article.find(params[:id])
-    @article.delete
+    article = Article.find(params[:id])
+    article.delete
+    redirect "/articles"
   end
 
 end
